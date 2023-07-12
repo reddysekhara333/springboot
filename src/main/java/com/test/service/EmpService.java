@@ -37,4 +37,23 @@ public class EmpService {
     public List<Employee> getEmployeesBySortFiled(String field){
         return employeeRepo.findAll(Sort.by(Sort.Direction.ASC,field));
     }
+
+    public String deleteById(Integer empid) {
+        employeeRepo.deleteById(empid);
+        return "deleted.";
+    }
+
+    public Employee updateEmp(Employee employee) {
+        Employee employee1=employeeRepo.getByEmpId(employee.getEmpId());
+        if(employee1!=null){
+            employee1.setEmpName(employee.getEmpName());
+            employee1.setSalary(employee.getSalary());
+            employee1.setEmail(employee.getEmail());
+
+        }else{
+            return null;
+        }
+
+        return employeeRepo.save(employee1);
+    }
 }

@@ -44,4 +44,16 @@ public class EmpController {
         return ResponseEntity.ok(empService.getEmployeesBySortFiled(filed));
     }
 
+    @DeleteMapping("{empid}")
+    public String deleteById(@PathVariable Integer empid){
+        empService.deleteById(empid);
+        return "deleted Employee id is:-"+empid;
+
+    }
+
+    @PutMapping("/")
+    public ResponseEntity<Employee> updateEmp(@RequestBody Employee employee){
+        return new ResponseEntity<>(empService.updateEmp(employee),HttpStatus.ACCEPTED);
+    }
+
 }
